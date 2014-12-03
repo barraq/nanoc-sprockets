@@ -34,6 +34,8 @@ module Nanoc::Sprockets
       end
       attr_writer :prefix
 
+      # When true, the asset paths will return digest paths
+      attr_accessor :digest
     end
 
     # Convience method for configuring Nanoc::Sprockets::Helpers.
@@ -41,7 +43,7 @@ module Nanoc::Sprockets
       yield self
     end
 
-    # Returns the path to an item or a filename either in the Sprockets environment.
+    # Returns the path to an item or a filename in the Sprockets environment.
     def asset_path(item_or_filename, options = {})
       if item_or_filename.is_a?(::Nanoc::Item)
         filename = item_or_filename[:filename]
@@ -50,8 +52,12 @@ module Nanoc::Sprockets
       end
       filename = File.basename(filename).gsub(/^(\w+\.\w+).*/, '\1')
 
-      if asset = Helper.environment[filename]
-        File.join(Helper.prefix, asset.logical_path)
+      if asset = Helper.environment.find_asset(filename)
+        if Helper.digest
+          File.join(Helper.prefix, asset.digest_path)
+        else
+          File.join(Helper.prefix, asset.logical_path)
+        end
       else
         raise "error locating #{filename}."
       end

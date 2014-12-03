@@ -29,9 +29,12 @@ Or install it yourself as:
 ## Configuration
 
 [nanoc-sprockets3][nanoc-sprockets3] does not require any mandatory configuration, however you may want to configure it
-for your needs. Currently you can configure [nanoc-sprockets3][nanoc-sprockets3] with two parameters:
- - *prefix* which is the prefix to give to all assets
- - *environment* which is the Sprockets environment to use
+for your needs.
+
+Currently you can configure [nanoc-sprockets3][nanoc-sprockets3] with the following parameters:
+ - **prefix** *[default: '/asset']* which is the prefix to give to all assets
+ - **digest** *[default: false]* which when true will return digest paths instead of logical path
+ - **environment** which is the Sprockets environment to use
 
 The default environment is configured with the following paths
 - content/assets/
@@ -66,6 +69,7 @@ Nanoc::Sprockets::Helper.configure do |config|
     env.append_path 'vendor/assets/jquery'
   end
   config.prefix      = '/assets'
+  config.digest      = true
 end
 ```
 
