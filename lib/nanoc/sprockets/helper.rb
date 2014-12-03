@@ -21,7 +21,7 @@ module Nanoc::Sprockets
       # This defaults to the context's #environment method.
       def environment
         @environment ||= ::Sprockets::Environment.new(File.expand_path('.')) do |env|
-          paths =   DEFAULT_ASSETS_DIRS + DEFAULT_ASSETS_PATHS.map{|p| DEFAULT_ASSETS_DIRS.map{|f| "#{p}#{f}"}}.flatten
+          paths = DEFAULT_ASSETS_PATHS + DEFAULT_ASSETS_PATHS.map{|p| DEFAULT_ASSETS_DIRS.map{|f| "#{p}#{f}"}}.flatten
           paths.each{ |path| env.append_path path }
         end
       end
