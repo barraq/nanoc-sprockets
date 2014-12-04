@@ -16,13 +16,15 @@ module Nanoc::Sprockets
         'content/assets/', 'vendor/assets/', 'static/assets/'
     ]
 
+    # Define default paths loaded in default Sprockets environments
+    DEFAULT_PATHS = DEFAULT_ASSETS_PATHS + DEFAULT_ASSETS_PATHS.map{|p| DEFAULT_ASSETS_DIRS.map{|f| "#{p}#{f}"}}.flatten
+
     class << self
       # Set the Sprockets environment to search for assets.
       # This defaults to the context's #environment method.
       def environment
         @environment ||= ::Sprockets::Environment.new(File.expand_path('.')) do |env|
-          paths = DEFAULT_ASSETS_PATHS + DEFAULT_ASSETS_PATHS.map{|p| DEFAULT_ASSETS_DIRS.map{|f| "#{p}#{f}"}}.flatten
-          paths.each{ |path| env.append_path path }
+          DEFAULT_PATHS.each{ |path| env.append_path path }
         end
       end
       attr_writer :environment

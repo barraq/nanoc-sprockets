@@ -64,9 +64,13 @@ include Nanoc::Sprockets::Helper
 
 Nanoc::Sprockets::Helper.configure do |config|
   config.environment = ::Sprockets::Environment.new(File.expand_path('.')) do |env|
+    # append defaults paths (if you want to)
+    Nanoc::Sprockets::Helper::DEFAULT_PATHS.each { |path| env.append_path path }
+    # append extra paths
     env.append_path 'app/assets/javascripts'
     env.append_path 'lib/assets/javascripts'
     env.append_path 'vendor/assets/jquery'
+    env.append_path 'bower'
   end
   config.prefix      = '/assets'
   config.digest      = true
