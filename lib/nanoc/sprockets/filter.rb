@@ -18,7 +18,7 @@ module Nanoc::Sprockets
       environment.js_compressor  = params[:js_compressor]
 
       if asset = environment[filename]
-        update_dependencies_for_current_item(asset.metadata[:dependency_paths])
+        update_dependencies_for_current_item(asset.included)
         asset.to_s
       else
         raise "error locating #{filename} / #{@item[:filename]}"
@@ -35,7 +35,7 @@ module Nanoc::Sprockets
     def imported_filename_to_item(filename)
       @items.find do |i|
         i.raw_filename &&
-            Pathname.new(i.raw_filename).realpath == Pathname.new(filename).realpath
+          Pathname.new(i.raw_filename).realpath == Pathname.new(URI.parse(filename).path).realpath
       end
     end
   end
