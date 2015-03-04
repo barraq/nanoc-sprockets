@@ -18,7 +18,18 @@ module Nanoc::Sprockets
       environment.js_compressor  = params[:js_compressor]
 
       if asset = environment[filename]
-        update_dependencies_for_current_item(asset.metadata[:dependency_paths])
+        # Get list of dependencies from Sprockets
+        # @warning Sprockets 3.x is still in beta, API might change
+        # @see https://github.com/sstephenson/sprockets/issues/673
+        dependencies = unless Sprockets::VERSION == '3.0.0.beta.6' then
+          asset.metadata[:dependencies]
+             .select { |e| e =~ /^file-digest:\/\// }
+             .map { |e| e.gsub /^file-digest:\/\//, '' }
+        else
+          asset.metadata[:dependency_paths]
+        end
+
+        update_dependencies_for_current_item(dependencies)
         asset.to_s
       else
         raise "error locating #{filename} / #{@item[:filename]}"
@@ -35,6 +46,7 @@ module Nanoc::Sprockets
     def imported_filename_to_item(filename)
       @items.find do |i|
         i.raw_filename &&
+            Pathname.new(filename).exist? &&
             Pathname.new(i.raw_filename).realpath == Pathname.new(filename).realpath
       end
     end
