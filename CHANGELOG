@@ -1,0 +1,13 @@
+nanoc-sprockets (1.0.3) stable;
+
+  * add support for Sprockets 3.x.beta.8
+  * add CHANGELOG
+
+nanoc-sprockets (1.0.3) stable;
+
+  * add support for digest paths
+  * fix bug in default Sprockets env definition
+  
+nanoc-sprockets (1.0.0) stable;
+
+  * bring support to sprockets 3.x.beta to nanoc
