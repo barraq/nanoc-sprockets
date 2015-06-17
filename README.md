@@ -74,6 +74,7 @@ Nanoc::Sprockets::Helper.configure do |config|
   end
   config.prefix      = '/assets'
   config.digest      = true
+  config.debug       = false
 end
 ```
 

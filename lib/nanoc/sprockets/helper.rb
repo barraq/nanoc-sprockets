@@ -29,6 +29,9 @@ module Nanoc::Sprockets
           # Provide fallback implementation for asset_path in case no handler is found
           env.context_class.class_eval do
             def asset_path(path, options = {})
+              if Helper.debug
+                warn "Using fallback implementation of asset_path with #{path}"
+              end
               File.join(Helper.prefix, path)
             end
           end
@@ -42,6 +45,10 @@ module Nanoc::Sprockets
         @prefix ||= '/assets'
       end
       attr_writer :prefix
+
+      # When true, activate debug mode
+      attr_accessor :debug
+      attr_writer :debug
 
       # When true, the asset paths will return digest paths
       attr_accessor :digest
