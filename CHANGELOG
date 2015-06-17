@@ -1,3 +1,8 @@
+nanoc-sprockets (1.0.4) stable;
+
+  * add support for Sprockets ~> 3.2, >= 3.0.0
+  * add debug mode for verbose output
+
 nanoc-sprockets (1.0.3) stable;
 
   * add support for Sprockets 3.x.beta.8
