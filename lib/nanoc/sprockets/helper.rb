@@ -24,7 +24,14 @@ module Nanoc::Sprockets
       # This defaults to the context's #environment method.
       def environment
         @environment ||= ::Sprockets::Environment.new(File.expand_path('.')) do |env|
+          # Append predefined paths
           DEFAULT_PATHS.each{ |path| env.append_path path }
+          # Provide fallback implementation for asset_path in case no handler is found
+          env.context_class.class_eval do
+            def asset_path(path, options = {})
+              File.join(Helper.prefix, path)
+            end
+          end
         end
       end
       attr_writer :environment
