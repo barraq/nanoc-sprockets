@@ -61,10 +61,10 @@ module Nanoc::Sprockets
 
     # Returns the path to an item or a filename in the Sprockets environment.
     def asset_path(item_or_filename, options = {})
-      if item_or_filename.is_a?(::Nanoc::Item)
-        filename = item_or_filename[:filename]
-      else
+      if item_or_filename.is_a? String
         filename = item_or_filename
+      else
+        filename = item_or_filename[:filename]
       end
       filename = File.basename(filename).gsub(/^(\w+\.\w+).*/, '\1')
 
@@ -77,6 +77,8 @@ module Nanoc::Sprockets
       else
         raise "Something is wrong: unable to locate #{filename}."
       end
+    rescue TypeError => error
+      raise "Unable to process `#{item_or_filename}` ensure that you provided a valid Nanoc::Item or a filename: #{error}"
     end
   end
 

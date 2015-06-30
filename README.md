@@ -6,6 +6,8 @@ You are using [nanoc-sprockets-filter][nanoc-sprockets-filter] or [nanoc-sprocke
 you would like to use Sprockets 3.x to take advantages of the news features then [nanoc-sprockets3] is
 what you are looking for !
 
+*Compatible* with **Nanoc 3.x** and **Nanoc 4.x**
+
 **Note:** *Unlike [nanoc-sprockets-filter] or [nanoc-sprockets] that lack a support
 for dependency tracking, which is annoying when working with partials and/or livereload, [nanoc-sprockets3] is built
 on top of [Sprockets 3.x][sprockets] and integrates seamlessly with Nanoc3/nanoc4 and livereload.
