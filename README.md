@@ -35,6 +35,7 @@ Currently you can configure [nanoc-sprockets3][nanoc-sprockets3] with the follow
  - **prefix** *[default: '/asset']* which is the prefix to give to all assets
  - **digest** *[default: false]* which when true will return digest paths instead of logical path
  - **environment** which is the Sprockets environment to use
+ - **debug** *[default: false]* which when set to true activate verbosity
 
 The default environment is configured with the following paths
 - content/assets/
