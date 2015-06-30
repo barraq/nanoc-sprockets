@@ -75,7 +75,7 @@ module Nanoc::Sprockets
           File.join(Helper.prefix, asset.logical_path)
         end
       else
-        raise "error locating #{filename}."
+        raise "Something is wrong: unable to locate #{filename}."
       end
     end
   end
